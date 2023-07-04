@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var users_1 = require("../controllers/users");
+var validatons_1 = require("../middlewares/validatons");
+var router = (0, express_1.Router)();
+router.get('/me', users_1.getCurrentUser);
+router.get('/:id', validatons_1.validateObjId, users_1.getUser);
+router.patch('/me/avatar', validatons_1.validateAvatar, users_1.updateUserAvatar);
+router.patch('/me', validatons_1.validateProfile, users_1.updateUserInfo);
+exports.default = router;
