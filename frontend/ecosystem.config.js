@@ -1,4 +1,10 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
+
+dotenv.config(
+  {
+    path: '.env.deploy',
+  },
+);
 
 const {
   DEPLOY_USER, DEPLOY_HOST, DEPLOY_PATH, DEPLOY_REPO, DEPLOY_REF = 'origin/master',
@@ -7,7 +13,6 @@ const {
 module.exports = {
   apps: [{
     name: 'frontend',
-    script: './dist/app.js',
   }],
 
   // Настройка деплоя
@@ -18,7 +23,7 @@ module.exports = {
       ref: DEPLOY_REF,
       repo: DEPLOY_REPO,
       path: DEPLOY_PATH,
-      'post-deploy': `cd ~/${DEPLOY_PATH}/frontend && npm i && npm run build`,
+      'post-deploy': `cd ~/frontend/source/frontend/ && npm i && npm run build`,
     },
   },
 };
